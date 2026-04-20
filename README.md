@@ -16,7 +16,7 @@ Sistema completo de bot Telegram para revendedores de conteúdo IPTV com IA inte
 ## Instalação rápida
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPO/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/https://github.com/Inforlozzi-ai/bot_admin_inforlozzi_Oficial.git/main/install.sh | bash
 ```
 
 ## Variáveis de ambiente (bot admin)
@@ -27,7 +27,7 @@ API_ID=            # my.telegram.org
 API_HASH=          # my.telegram.org
 ADMIN_IDS=         # IDs separados por vírgula
 BOTS_BASE=/opt/bots
-REPO_RAW=https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPO/main
+REPO_RAW=https://raw.githubusercontent.com/https://github.com/Inforlozzi-ai/bot_admin_inforlozzi_Oficial.git/main
 ```
 
 ## Funcionalidades
