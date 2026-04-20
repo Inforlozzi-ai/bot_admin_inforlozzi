@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  bot-admin-reseller:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bot-admin-reseller
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - /opt/bots:/opt/bots
+      - /var/run/docker.sock:/var/run/docker.sock
