@@ -1,14 +1,11 @@
 #!/bin/bash
 set -e
 
-REPO_RAW="${REPO_RAW:-https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPO/main}"
+REPO_RAW="${REPO_RAW:-https://raw.githubusercontent.com/Inforlozzi-ai/bot_admin_inforlozzi_Oficial/main}"
 INSTALL_DIR="/opt/bot-admin-reseller"
 CTR="bot-admin-reseller"
 
 echo "=== InforLozzi AI - Bot Admin Installer ==="
-
-# Dependências
-apt-get update -qq && apt-get install -y -qq docker.io curl
 
 # Diretório
 mkdir -p "$INSTALL_DIR" /opt/bots
