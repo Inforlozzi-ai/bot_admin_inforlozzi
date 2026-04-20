@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-REPO_RAW="${REPO_RAW:-https://raw.githubusercontent.com/Inforlozzi-ai/bot_admin_inforlozzi_Oficial/main}"
+REPO_RAW="${REPO_RAW:-https://raw.githubusercontent.com/Inforlozzi-ai/bot_admin_inforlozzi_Oficial/master}"
 INSTALL_DIR="/opt/bot-admin-reseller"
 CTR="bot-admin-reseller"
 
