@@ -61,11 +61,11 @@ def make_dockerfile(path):
           "COPY bot.py ." + NL + 'CMD ["python3","-u","bot.py"]' + NL)
     open(os.path.join(path,"Dockerfile"),"w").write(df)
 
-# ─── CHAT LISTER ───────────────────────────────────────────────────────────────
+# â”€â”€â”€ CHAT LISTER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 async def listar_chats_bot(nome_bot, tipo="grupos", pagina=0):
     """Executa chat_lister.py dentro do container do userbot e retorna JSON"""
     ctr = "userbot_" + nome_bot
-    # garante que o script está dentro do container
+    # garante que o script estÃ¡ dentro do container
     lister_local = os.path.join(BOTS_BASE, nome_bot, "chat_lister.py")
     if not os.path.exists(lister_local):
         try:
@@ -86,14 +86,14 @@ async def listar_chats_bot(nome_bot, tipo="grupos", pagina=0):
     except:
         return {"erro": r.stderr[:300] or "Falha ao listar chats", "itens": []}
 
-# ─── ESTADO ────────────────────────────────────────────────────────────────────
+# â”€â”€â”€ ESTADO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 AGUARDANDO   = {}
 NOVO_BOT     = {}
 LOGO_BOT     = {}
 FWD_CONTEXTO = {}
 CHAT_SEL     = {}  # uid -> {nome_bot, modo(source/target), selecionados:[], pagina, tipo}
 
-# ─── KEYBOARDS ─────────────────────────────────────────────────────────────────
+# â”€â”€â”€ KEYBOARDS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 def kb_reply_main():
     return [
         [Button.text("Meus Bots"),    Button.text("Novo Bot"),      Button.text("Atualizar Todos")],
@@ -151,22 +151,22 @@ def kb_tipo_chat(nome, modo):
     ]
 
 def kb_lista_chats(nome, modo, itens, pagina, total, tipo, selecionados):
-    """Lista chats como botões inline — imagem 3"""
+    """Lista chats como botÃµes inline â€” imagem 3"""
     por_pag = 8
     rows = []
     for it in itens:
         cid = str(it["id"])
-        marcado = "✅ " if cid in selecionados else ""
+        marcado = "âœ… " if cid in selecionados else ""
         label = marcado + it["nome"][:38]
         rows.append([Button.inline(label, ("csel_pick|"+modo+"|"+nome+"|"+cid).encode())])
-    # paginação
+    # paginaÃ§Ã£o
     nav = []
     if pagina > 0:
         nav.append(Button.inline("Anterior", ("csel_tipo|"+modo+"|"+nome+"|"+tipo+"|"+str(pagina-1)).encode()))
     if (pagina+1)*por_pag < total:
         nav.append(Button.inline("Proxima", ("csel_tipo|"+modo+"|"+nome+"|"+tipo+"|"+str(pagina+1)).encode()))
     if nav: rows.append(nav)
-    # ações finais
+    # aÃ§Ãµes finais
     qtd = str(len(selecionados))
     rows.append([Button.inline("Confirmar ("+qtd+" selecionados)", ("csel_confirmar|"+modo+"|"+nome).encode())])
     rows.append([Button.inline("Voltar", ("csel_voltar|"+modo+"|"+nome).encode()),
@@ -277,7 +277,7 @@ async def instalar_bot(ev, dados):
     except Exception as e:
         await ev.respond("Erro ao instalar: "+str(e),buttons=kb_reply_main())
 
-# ─── /start /menu ──────────────────────────────────────────────────────────────
+# â”€â”€â”€ /start /menu â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 @bot.on(events.NewMessage(pattern="^/start$"))
 async def cmd_start(ev):
     if not is_admin(ev.sender_id): return
@@ -288,7 +288,7 @@ async def cmd_menu(ev):
     if not is_admin(ev.sender_id): return
     await ev.respond(status_geral(),buttons=kb_reply_main())
 
-# ─── REPLY KEYBOARD ────────────────────────────────────────────────────────────
+# â”€â”€â”€ REPLY KEYBOARD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 @bot.on(events.NewMessage(pattern=r"^(Meus Bots|Novo Bot|Atualizar Todos|Iniciar Bot|Parar Bot|Reiniciar Bot|Ver Logs|Remover Bot|Status Geral|Reencaminhar|Config IA)$"))
 async def handler_reply(ev):
     if not is_admin(ev.sender_id): return
@@ -326,7 +326,7 @@ async def handler_reply(ev):
         AGUARDANDO.pop(uid,None); NOVO_BOT.pop(uid,None)
         await ev.respond("Config IA - InforLozzi AI:",buttons=kb_ia_global())
 
-# ─── FOTO LOGO ─────────────────────────────────────────────────────────────────
+# â”€â”€â”€ FOTO LOGO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 @bot.on(events.NewMessage())
 async def handler_foto(ev):
     uid=ev.sender_id
@@ -346,7 +346,7 @@ async def handler_foto(ev):
     except Exception as e:
         await ev.respond("Erro: "+str(e),buttons=kb_ia_bot(nome))
 
-# ─── ENTRADA TEXTO ─────────────────────────────────────────────────────────────
+# â”€â”€â”€ ENTRADA TEXTO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 @bot.on(events.NewMessage())
 async def entrada_texto(ev):
     uid=ev.sender_id
@@ -444,8 +444,7 @@ async def entrada_texto(ev):
     else:
         NOVO_BOT[uid].pop("passo"); NOVO_BOT[uid]["confirmando"]=True
         await ev.respond(resumo_novo_bot(dados),buttons=kb_confirmar())
-
-# ─── CALLBACKS ─────────────────────────────────────────────────────────────────
+# â”€â”€â”€ CALLBACKS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 @bot.on(events.CallbackQuery)
 async def callback(ev):
     uid=ev.sender_id
@@ -483,7 +482,7 @@ async def callback(ev):
     ctr="userbot_"+nome; img="userbot_img_"+nome
     env_path=os.path.join(BOTS_BASE,nome,".env"); label=nome_exibicao(nome)
 
-    # ── gerenciar ──
+    # â”€â”€ gerenciar â”€â”€
     if acao=="gerenciar":
         est="ATIVO" if container_ativo(nome) else "PARADO"
         await ev.edit("Gerenciar: "+label+NL+"Status: "+est,buttons=kb_gerenciar_bot(nome))
@@ -512,7 +511,7 @@ async def callback(ev):
         for b in bots: atualizar_env(os.path.join(BOTS_BASE,b,".env"),"OPENAI_MODEL",nome)
         await ev.edit("Modelo "+nome+" definido.",buttons=kb_ia_global())
 
-    # ── IA por bot ──
+    # â”€â”€ IA por bot â”€â”€
     elif acao=="ia_bot": await ev.edit("Config IA - "+label+":",buttons=kb_ia_bot(nome))
     elif acao=="ia_toggle_troca":
         novo="0" if ler_env(env_path,"IA_TROCAR_LOGO","0")=="1" else "1"
@@ -539,7 +538,7 @@ async def callback(ev):
         NOVO_BOT.pop(uid,None); LOGO_BOT[uid]=nome; AGUARDANDO[uid]="ia_logo_foto"
         await ev.edit("Envie a logo como FOTO (nao como arquivo)."+NL+"Sera salva em /app/logo.jpg no container.")
 
-    # ── SELETOR DE CHAT — menus tipo ──
+    # â”€â”€ SELETOR DE CHAT â€” menus tipo â”€â”€
     elif acao=="fwd_config": await ev.edit("Reencaminhamento - "+label+":",buttons=kb_reencaminhamento(nome))
     elif acao=="fwd_ver":
         src=ler_env(env_path,"SOURCE_CHAT_IDS",""); tgt=ler_env(env_path,"TARGET_GROUP_ID","?")
@@ -552,7 +551,7 @@ async def callback(ev):
         CHAT_SEL[uid]={"nome":nome,"modo":"target","selecionados":[],"pagina":0,"tipo":"grupos"}
         await ev.edit("Grupo Destino - "+label+NL+NL+"Selecione o tipo de chat:",buttons=kb_tipo_chat(nome,"target"))
 
-    elif acao=="csel_tipo":
+elif acao=="csel_tipo":
         # partes: csel_tipo | modo | nome_bot | tipo | [pagina]
         modo2=partes[1]; nome2=partes[2]; tipo=partes[3]
         pagina=int(partes[4]) if len(partes)>4 else 0
